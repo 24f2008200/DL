@@ -56,7 +56,6 @@ Substitute $u_t=\beta u_{t-1}+2e_{t-1}$ into $e_t-e_{t-1}=-\eta u_t$:
 
 $$
 e_t-e_{t-1}
-=
 \beta(e_{t-1}-e_{t-2})-2\eta e_{t-1}
 $$
 

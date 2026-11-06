@@ -286,7 +286,80 @@ There are two distinct phases:
 Here is the complete pseudocode for one training observation.
 
 ```
-# Network:# Input -> Hidden 1 -> Hidden 2 -> Output## sigmoid(z) = 1 / (1 + exp(-z))def sigmoid(z):    return 1 / (1 + exp(-z))def train_one_sample(x, y, W1, b1, W2, b2, W3, b3, eta):    # ==================================    # PHASE 1: FORWARD PROPAGATION    # ==================================    # Input layer    a0 = x    # Hidden layer 1    z1 = W1 @ a0 + b1    a1 = sigmoid(z1)    # Hidden layer 2    z2 = W2 @ a1 + b2    a2 = sigmoid(z2)    # Output layer    z3 = W3 @ a2 + b3    a3 = sigmoid(z3)    # Calculate loss    loss = 0.5 * sum((a3 - y)**2)    # ==================================    # PHASE 2: BACKPROPAGATION
+
+# Network:
+# Input -> Hidden 1 -> Hidden 2 -> Output
+#
+# sigmoid(z) = 1 / (1 + exp(-z))
+
+def sigmoid(z):
+    return 1 / (1 + exp(-z))
+
+
+def train_one_sample(x, y, W1, b1, W2, b2, W3, b3, eta):
+
+    # ==================================
+    # PHASE 1: FORWARD PROPAGATION
+    # ==================================
+
+    # Input layer
+    a0 = x
+
+    # Hidden layer 1
+    z1 = W1 @ a0 + b1
+    a1 = sigmoid(z1)
+
+    # Hidden layer 2
+    z2 = W2 @ a1 + b2
+    a2 = sigmoid(z2)
+
+    # Output layer
+    z3 = W3 @ a2 + b3
+    a3 = sigmoid(z3)
+
+    # Calculate loss
+    loss = 0.5 * sum((a3 - y)**2)
+
+    # ==================================
+    # PHASE 2: BACKPROPAGATION
+    # ==================================
+
+    # Output layer delta
+    d3 = (a3 - y) * a3 * (1 - a3)
+
+    # Output layer gradients
+    dW3 = outer(d3, a2)
+    db3 = d3
+
+    # Hidden layer 2 delta
+    d2 = (W3.T @ d3) * a2 * (1 - a2)
+
+    # Hidden layer 2 gradients
+    dW2 = outer(d2, a1)
+    db2 = d2
+
+    # Hidden layer 1 delta
+    d1 = (W2.T @ d2) * a1 * (1 - a1)
+
+    # Hidden layer 1 gradients
+    dW1 = outer(d1, a0)
+    db1 = d1
+
+    # ==================================
+    # PHASE 3: UPDATE PARAMETERS
+    # ==================================
+
+    W1 = W1 - eta * dW1
+    b1 = b1 - eta * db1
+
+    W2 = W2 - eta * dW2
+    b2 = b2 - eta * db2
+
+    W3 = W3 - eta * dW3
+    b3 = b3 - eta * db3
+
+    return W1, b1, W2, b2, W3, b3, loss
+
 ```
 
 Here, `outer(d3, a2)` means the outer product $\delta^{(3)}(a^{(2)})^T$.

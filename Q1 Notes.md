@@ -244,7 +244,7 @@ $$
 Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}\_{ij} - y\_{ij})^2$
 | Output type | Output activation $O$ | Loss |
 |---|---|---|
-| Real values | Linear: $O(a_L)=W_Oa_L+b_O$ | Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}_{ij}-y_{ij})^2$ |
+| Real values | Linear: $O(a_L)=W_Oa_L+b_O$ | Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}\_{ij} - y\_{ij})^2$ |
 | Probabilities ($k$ classes) | Softmax: $\hat{y}_j=\frac{\exp(a_{L,j})}{\sum_i\exp(a_{L,i})}$ | Cross-entropy: $L=-\sum_c y_c\log\hat{y}_c=-\log\hat{y}_\ell$ ($\ell$ = true class) |
 
 - A sigmoid output is wrong for real-valued targets because it is capped to $(0,1)$.

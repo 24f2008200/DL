@@ -256,7 +256,7 @@ Cross-entropy: $L=-\sum_c y_c\log\hat{y}\_c=-\log\hat{y}_\ell$ ($\ell$ = true cl
 
 | Quantity | Formula |
 |---|---|
-| w.r.t. $\hat{y}$ | $\frac{\partial L}{\partial \hat{y}_i}=-\frac{\mathbf{1}(i=\ell)}{\hat{y}_\ell}$, i.e. $\nabla_{\hat{y}}L=-\frac{1}{\hat{y}_\ell}e_\ell$ |
+| w.r.t. $\hat{y}$ | $\frac{\partial L}{\partial \hat{y}\_i}=-\frac{\mathbf{1}(i=\ell)}{\hat{y}_\ell}$, i.e. $\nabla_{\hat{y}}L=-\frac{1}{\hat{y}\_\ell}e_\ell$ |
 | w.r.t. $a_L$ | $\frac{\partial L}{\partial a_{L,i}}=-(\mathbf{1}(\ell=i)-\hat{y}_i)$, i.e. $\nabla_{a_L}L=-(e_\ell-\hat{y})=\hat{y}-e_\ell$ |
 | w.r.t. $h_{k-1}$ | $\nabla_{h_{k-1}}L=W_k^T\nabla_{a_k}L$ |
 | w.r.t. $a_{k-1}$ | $\nabla_{a_{k-1}}L=\nabla_{h_{k-1}}L\odot g'(a_{k-1})$ (element-wise) |

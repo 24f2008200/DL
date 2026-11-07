@@ -10,7 +10,8 @@ Prepared for B Nadar · Source: CS6910 lecture slides (Modules 2.1–5.8), histo
 
 | Model | Rule | Key points |
 |---|---|---|
-| McCulloch-Pitts (MP) | $g(x)=\sum_i x_i$, $x_i\in\{0,1\}$. $y=1$ if $g(x)\geq\theta$, else $0$. If any inhibitory input is $1$, $y=0$. | Boolean inputs, fixed weights, hand-set $\theta$ |
+| McCulloch-Pitts (MP) | $g(x)=\sum_i x_i$, $x_i\in\{0,1\}$. $y=1$ if $g(x)\geq\theta$, else $0$.
+If any inhibitory input is $1$, $y=0$. | Boolean inputs, fixed weights, hand-set $\theta$ |
 | Perceptron | $y=1$ if $\sum_{i=0}^{n}w_ix_i\geq0$, else $0$, with $x_0=1$, $w_0=-\theta$. | Real inputs, learnable weights and threshold. Step function (harsh, not differentiable at the threshold) |
 | Sigmoid (logistic) | $y=\frac{1}{1+\exp(-(w_0+\sum_{i=1}^{n}w_ix_i))}$. One input: $f(x)=\frac{1}{1+e^{-(wx+b)}}$, with $b=w_0$. | Smooth, continuous, differentiable. $y\in(0,1)$, read as a probability |
 

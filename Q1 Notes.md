@@ -153,8 +153,7 @@ $$
 - Taylor view:
 
 $$
-L(\theta+\eta u)
-=
+L(\theta+\eta u)=
 L(\theta)
 +\eta u^T\nabla L(\theta)
 +\frac{\eta^2}{2!}u^T\nabla^2L(\theta)u+\cdots
@@ -222,8 +221,7 @@ $$
 - For $L=3$:
 
 $$
-\hat{y}
-=
+\hat{y}=
 O\left(
 W_3g\left(W_2g(W_1x+b_1)+b_2\right)+b_3
 \right)
@@ -266,8 +264,7 @@ $$
 Chain rule over multiple paths:
 
 $$
-\frac{\partial L}{\partial h_{ij}}
-=
+\frac{\partial L}{\partial h_{ij}}=
 \sum_m
 \left(
 \frac{\partial L}{\partial a_{i+1,m}}
@@ -360,4 +357,116 @@ The slide code uses $v=\beta v+\eta\nabla$ with $w=w-v$ ($\eta$ inside). These a
 
 Five components: **Data** $\{x_i,y_i\}$, **Model** (e.g. $\hat{y}=\frac{1}{1+e^{-w^Tx}}$), **Parameters** ($w,b$), **Learning algorithm** (PLA, gradient descent), **Loss** (guides learning; we minimize it).
 
-## B
+## B3. Gradient descent essentials
+
+- Error surface is plotted over $(w,b)$. Random or manual search is hopeless, so use the gradient.
+- Move by $\eta\cdot\Delta\theta$ (small $\eta$ = conservative). The best direction is exactly opposite the gradient.
+- Update size is proportional to the gradient. On gentle slopes the gradient is tiny, so progress is slow, regardless of start point.
+- Contour plots: closely spaced contours mean a steep slope; widely spaced contours mean a gentle slope.
+- A big $\eta$ does not fix gentle slopes: it blows up the already large gradients in steep regions.
+
+## B4. Representation power
+
+- Perceptron network: any Boolean function with one hidden layer of $2^n$ units (each hidden unit responsible for one input pattern, each output weight for one row of the truth table). Cost is exponential growth in $n$.
+- Sigmoid network: with a very large $w$, a sigmoid becomes a step function (step at $x=-b/w$). Subtracting two steps (weights $+1$ and $-1$) gives a tower. In 2D, combine towers built along $x_1$ and $x_2$, then cut the tails. Many towers added together approximate any continuous surface, which is the intuition behind universal approximation.
+
+## B5. Why cross-entropy with softmax
+
+- Squared error + linear output is for real-valued targets (e.g. predicting ratings).
+- Classification targets are one-hot (a probability distribution), so use softmax outputs and cross-entropy. The simple gradient $\hat{y}-e_\ell$ is a big payoff.
+
+## B6. Backprop intuition
+
+- Treat each layer as being asked 'how much are you responsible for the loss?'. Gradients are passed backwards: output, then hidden activations, then weights and biases.
+- In a deep but thin network, the derivative is just a long chain-rule product. For wider networks, sum over all paths.
+
+## B7. Optimizer comparison
+
+- **Momentum** takes larger steps on gentle slopes (it remembers past gradients), but can overshoot and oscillate across a valley with U-turns. Slide example: after 50 iterations momentum reached error $0.00001$, while vanilla GD was stuck at $0.16$.
+- **NAG** peeks ahead before computing the gradient, so it corrects course sooner, makes smaller oscillations and shorter U-turns, and is less likely to escape the minimum valley.
+- **Full-batch GD:** exact gradient, loss decreases at each step in theory, but one update needs a pass over all data (very slow for large $N$).
+- **SGD:** very fast updates but a noisy estimate from one point (like estimating $P(\text{heads})$ from one toss). No guarantee each step lowers the loss. Oscillations occur because each point pushes the parameters in its own favoured direction.
+- **Mini-batch:** better estimate ($k=25$ visibly reduces oscillations; bigger $B$ means a more accurate estimate). Oscillations never vanish while the gradient is approximate.
+- Stochastic and mini-batch versions of momentum and NAG exist. NAG still takes shorter U-turns than momentum, and both beat plain SGD.
+- **Line search** reaches the minimum faster than fixed-$\eta$ GD but costs several loss evaluations per step. Its oscillations differ from those of momentum/NAG.
+
+---
+
+# PART C: EXAM TRAPS AND A WORKED TEMPLATE
+
+## C1. Common traps
+
+- Perceptron fires on $\geq0$ (not $>0$). MP fires on $\geq\theta$.
+- Count of Boolean functions is $2^{2^n}$ (not $2^n$); hidden units needed is $2^n$.
+- 2-input case: 14 of 16 functions are linearly separable.
+- $\nabla_{a_L}L=\hat{y}-e_\ell$ only for softmax + cross-entropy.
+- $\nabla_{W_k}L$ is an outer product $\nabla_{a_k}L\cdot h_{k-1}^T$; shape must match $W_k$. $\nabla_{h_{k-1}}$ uses $W_k^T$ (transpose).
+- $\odot$ is element-wise multiplication with $g'(a)$.
+- Momentum uses the gradient at $w_t$; NAG uses the gradient at $w_t-\beta u_{t-1}$.
+- Steps per epoch: batch 1, SGD $N$, mini-batch $N/B$.
+- Sigmoid gradient has the extra factor $f(1-f)$. Do not forget the $x$ factor for $\nabla_w$ but not for $\nabla_b$.
+
+## C2. Worked template: one NAG step (sigmoid neuron, squared-error loss)
+
+Given:
+
+$$
+x=0.5,\quad y=1,\quad \beta=0.9,\quad \eta=0.1
+$$
+
+$$
+u_8=0.8,\quad w_9=2.5,\quad b_9=0
+$$
+
+1. Look-ahead:
+
+$$
+w_{\text{la}}=w_9-\beta u_8=2.5-0.72=1.78
+$$
+
+$$
+b_{\text{la}}=0-0.72=-0.72
+$$
+
+2. Prediction:
+
+$$
+\hat{y}=\sigma(1.78\cdot0.5-0.72)=\sigma(0.17)\approx0.5424
+$$
+
+3. Gradient:
+
+$$
+\nabla=
+(\hat{y}-y)\hat{y}(1-\hat{y})x
+$$
+
+$$=(-0.4576)(0.2482)(0.5)
+\approx-0.0568
+$$
+
+(An answer key may show $-0.056$ by rounding.)
+
+4. Update momentum:
+
+$$
+u_9=\beta u_8+\nabla=0.72-0.0568=0.6632
+$$
+
+5. Update weight:
+
+$$
+w_{10}=w_9-\eta u_9=2.5-0.06632
+\approx2.4337
+$$
+
+**Note:** $1.78$ and $-0.72$ are the look-ahead point, not $w_{10}$ and $b_{10}$.
+
+## C3. Quick self-check list
+
+- Write the PLA update rule and say why it converges.
+- Build XOR with the 4-hidden-unit network and state the output inequalities.
+- Derive $\nabla_w$ for a sigmoid neuron with squared error.
+- Derive $\frac{\partial L}{\partial a_{L,i}}=\hat{y}_i-\mathbf{1}(i=\ell)$.
+- Write the full backprop loop with shapes.
+- Contrast momentum, NAG, SGD, mini-batch, in both update rule and behaviour.

@@ -241,7 +241,7 @@ $$
 $$
 
 ## A6. Output activation and loss
-
+Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}_{ij}-y_{ij})^2$
 | Output type | Output activation $O$ | Loss |
 |---|---|---|
 | Real values | Linear: $O(a_L)=W_Oa_L+b_O$ | Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}_{ij}-y_{ij})^2$ |

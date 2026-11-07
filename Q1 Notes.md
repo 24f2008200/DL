@@ -254,11 +254,11 @@ $$
 
 | Quantity | Formula |
 |---|---|
-| w.r.t. $\hat{y}$ | $\frac{\partial L}{\partial\hat{y}_i}=-\frac{\mathbf{1}(i=\ell)}{\hat{y}_\ell}$, i.e. $\nabla_{\hat{y}}L=-\frac{1}{\hat{y}_\ell}e_\ell$ |
+| w.r.t. $\hat{y}$ | $\frac{\partial L}{\partial \hat{y}_i}=-\frac{\mathbf{1}(i=\ell)}{\hat{y}_\ell}$, i.e. $\nabla_{\hat{y}}L=-\frac{1}{\hat{y}_\ell}e_\ell$ |
 | w.r.t. $a_L$ | $\frac{\partial L}{\partial a_{L,i}}=-(\mathbf{1}(\ell=i)-\hat{y}_i)$, i.e. $\nabla_{a_L}L=-(e_\ell-\hat{y})=\hat{y}-e_\ell$ |
 | w.r.t. $h_{k-1}$ | $\nabla_{h_{k-1}}L=W_k^T\nabla_{a_k}L$ |
 | w.r.t. $a_{k-1}$ | $\nabla_{a_{k-1}}L=\nabla_{h_{k-1}}L\odot g'(a_{k-1})$ (element-wise) |
-| w.r.t. $W_k$ | $\nabla_{W_k}L=\nabla_{a_k}L\cdot h_{k-1}^T$ (outer product; entry $\frac{\partial L}{\partial W_{kij}}=\frac{\partial L}{\partial a_{ki}}\cdot h_{k-1,j}$) |
+| w.r.t. $W_k$ | $\nabla_{W_k}L=\nabla_{a_k}L\cdot h_{k-1}^T$ (outer product; entry $\frac{\partial L}{\partial W_{kij}}=\frac{\partial L}{\partial a_{k,i}}\cdot h_{k-1,j}$) |
 | w.r.t. $b_k$ | $\nabla_{b_k}L=\nabla_{a_k}L$ |
 
 Chain rule over multiple paths:

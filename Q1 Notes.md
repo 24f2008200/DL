@@ -241,11 +241,12 @@ $$
 $$
 
 ## A6. Output activation and loss
-Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}\_{ij} - y\_{ij})^2$
+Softmax: $\hat{y}\_j=\frac{\exp(a\_{L,j})}{\sum_i\exp(a_{L,i})}$
+Cross-entropy: $L=-\sum_c y_c\log\hat{y}\_c=-\log\hat{y}_\ell$ ($\ell$ = true class)
 | Output type | Output activation $O$ | Loss |
 |---|---|---|
 | Real values | Linear: $O(a_L)=W_Oa_L+b_O$ | Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}\_{ij} - y\_{ij})^2$ |
-| Probabilities ($k$ classes) | Softmax: $\hat{y}_j=\frac{\exp(a_{L,j})}{\sum_i\exp(a_{L,i})}$ | Cross-entropy: $L=-\sum_c y_c\log\hat{y}_c=-\log\hat{y}_\ell$ ($\ell$ = true class) |
+| Probabilities ($k$ classes) | Softmax: $\hat{y}\_j=\frac{\exp(a\_{L,j})}{\sum_i\exp(a_{L,i})}$ | Cross-entropy: $L=-\sum_c y_c\log\hat{y}\_c=-\log\hat{y}_\ell$ ($\ell$ = true class) |
 
 - A sigmoid output is wrong for real-valued targets because it is capped to $(0,1)$.
 - One-hot $y$ is a probability distribution, so $\hat{y}$ must be one too, which is why softmax is used.

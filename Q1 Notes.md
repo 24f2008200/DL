@@ -241,8 +241,7 @@ $$
 $$
 
 ## A6. Output activation and loss
-Softmax: $\hat{y}\_j=\frac{\exp(a\_{L,j})}{\sum_i\exp(a_{L,i})}$
-Cross-entropy: $L=-\sum_c y_c\log\hat{y}\_c=-\log\hat{y}_\ell$ ($\ell$ = true class)
+
 | Output type | Output activation $O$ | Loss |
 |---|---|---|
 | Real values | Linear: $O(a_L)=W_Oa_L+b_O$ | Squared error: $\frac{1}{N}\sum_i\sum_j(\hat{y}\_{ij} - y\_{ij})^2$ |
@@ -253,8 +252,7 @@ Cross-entropy: $L=-\sum_c y_c\log\hat{y}\_c=-\log\hat{y}_\ell$ ($\ell$ = true cl
 - $\hat{y}\_\ell$ is the predicted probability of the true class. $\log\hat{y}\_\ell$ is the log-likelihood, so minimizing $-\log\hat{y}_\ell$ means maximizing the likelihood.
 
 ## A7. Backpropagation (softmax output + cross-entropy)
-$\frac{\partial L}{\partial \hat{y}\_i}=-\frac{\mathbf{1}(i=\ell)}{\hat{y}\_\ell}$, i.e. $\nabla_{\hat{y}}L=-\frac{1}{\hat{y}\_\ell}e_\ell$ 
-$\frac{\partial L}{\partial a_{L,i}}=-(\mathbf{1}(\ell=i)-\hat{y}\_i)$, i.e. $\nabla_{a_L}L=-(e_\ell-\hat{y})=\hat{y}-e_\ell$
+
 | Quantity | Formula |
 |---|---|
 | w.r.t. $\hat{y}$ | $\frac{\partial L}{\partial \hat{y}\_i}=-\frac{\mathbf{1}(i=\ell)}{\hat{y}\_\ell}$, i.e. $\nabla_{\hat{y}}L=-\frac{1}{\hat{y}\_\ell}e_\ell$ |

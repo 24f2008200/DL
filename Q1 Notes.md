@@ -250,7 +250,7 @@ Cross-entropy: $L=-\sum_c y_c\log\hat{y}\_c=-\log\hat{y}_\ell$ ($\ell$ = true cl
 
 - A sigmoid output is wrong for real-valued targets because it is capped to $(0,1)$.
 - One-hot $y$ is a probability distribution, so $\hat{y}$ must be one too, which is why softmax is used.
-- $\hat{y}_\ell$ is the predicted probability of the true class. $\log\hat{y}_\ell$ is the log-likelihood, so minimizing $-\log\hat{y}_\ell$ means maximizing the likelihood.
+- $\hat{y}\_\ell$ is the predicted probability of the true class. $\log\hat{y}\_\ell$ is the log-likelihood, so minimizing $-\log\hat{y}_\ell$ means maximizing the likelihood.
 
 ## A7. Backpropagation (softmax output + cross-entropy)
 

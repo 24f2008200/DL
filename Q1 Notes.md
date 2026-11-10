@@ -1,7 +1,7 @@
 # Deep Learning: Exam Notes & Formula Sheet (Lectures 2–5)
 
 Prepared for B Nadar · Source: CS6910 lecture slides (Modules 2.1–5.8), history and biology left out.
-
+https://claude.ai/artifact/XTH8DK9m66s5fmgih1994w#949b67db-76e7
 ---
 
 # PART A: FORMULA SHEET

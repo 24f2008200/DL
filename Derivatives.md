@@ -203,7 +203,7 @@ $$ \boxed{\frac{\partial a_i}{\partial z_j}=-a_i a_j} $$
 
 The complete derivative is a Jacobian matrix:
 
-$$ \boxed{ J=\operatorname{diag}(a)-aa^T } $$
+$$ \boxed{ J={diag}(a)-aa^T } $$
 
 The important distinction is that Softmax outputs are interdependent. Changing one input affects all output probabilities.
 
@@ -464,11 +464,11 @@ $$ \frac{\partial L}{\partial\hat y} =e=\hat y-y $$
 
 For the second branch:
 
-$$ \frac{\partial L}{\partial\hat y} =\delta\operatorname{sign}(e) $$
+$$ \frac{\partial L}{\partial\hat y} =\delta{sign}(e) $$
 
 Therefore:
 
-$$ \boxed{ \frac{\partial L}{\partial\hat y} = \begin{cases} \hat y-y & |\hat y-y|\leq\delta\\\ \delta\operatorname{sign}(\hat y-y) &|\hat y-y|>\delta \end{cases} } $$
+$$ \boxed{ \frac{\partial L}{\partial\hat y} = \begin{cases} \hat y-y & |\hat y-y|\leq\delta\\\ \delta{sign}(\hat y-y) &|\hat y-y|>\delta \end{cases} } $$
 
 ## 6. Hinge Loss
 
@@ -547,7 +547,7 @@ The additional factor $(1-p_t)^\gamma$ reduces the contribution of examples that
 | Loss function             | Typical application         | Derivative                              |
 | ------------------------- | --------------------------- | --------------------------------------- |
 | MSE                       | Regression                  | $\hat y-y$ (with $1/2$)         |
-| MAE                       | Regression                  | $\operatorname{sign}(\hat y-y)$     |
+| MAE                       | Regression                  | ${sign}(\hat y-y)$     |
 | Binary Cross-Entropy      | Binary classification       | $\frac{\hat y-y}{\hat y(1-\hat y)}$ |
 | Categorical Cross-Entropy | Multiclass classification   | $-\frac{y_i}{\hat y_i}$             |
 | Huber                     | Robust regression           | Piecewise: error or clipped error       |
@@ -568,7 +568,7 @@ These combinations simplify considerably:
 | Sigmoid + BCE                    | $\hat y-y$                      |
 | Softmax + CCE                    | $\hat{\mathbf y}-\mathbf y$     |
 | Linear + MSE ($\frac12 e^2$) | $\hat y-y$                      |
-| Linear + MAE                     | $\operatorname{sign}(\hat y-y)$ |
+| Linear + MAE                     | ${sign}(\hat y-y)$ |
 
 This leads to a useful general backpropagation expression:
 

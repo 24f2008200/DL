@@ -316,13 +316,27 @@ Definition
 
 Using the piecewise definition:
 
-\$$ L= \begin{cases} \hat y-y & \hat y>y, y-\hat y & \hat y\<y , \end{cases} \$$
+$$
+L = \begin{cases}
+\hat y-y & \hat y>y\\
+y-\hat y & \hat y<y
+\end{cases}
+$$
 
 Derivation
 
 Differentiating:
 
-\$$ \boxed{ \frac{\partial L}{\partial \hat y} = \begin{cases} 1 & \hat y>y\\\ -1 & \hat y\<y \end{cases} } \$$
+$$
+\boxed{
+\frac{\partial L}{\partial \hat y}
+=
+\begin{cases}
+1 & \hat y>y\\
+-1 & \hat y<y
+\end{cases}
+}
+$$
 
 At \$\hat y=y\$, the derivative is undefined. A subgradient of zero is commonly used.
 

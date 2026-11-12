@@ -112,7 +112,14 @@ This addresses the problem of ReLU neurons becoming inactive for negative inputs
 
 Definition
 
-$$ f(z)= \begin{cases} \alpha z & z<0\\\ z & z\geq 0 \end{cases} $$
+$$ f(z)= 
+\begin{cases} 
+\alpha z ,
+& z<0,\\
+z ,
+& z\geq 0 ,
+\end{cases}
+$$
 
 Here, $\alpha$ is a small positive constant, often 0.01.
 

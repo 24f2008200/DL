@@ -316,7 +316,7 @@ Definition
 
 Using the piecewise definition:
 
-\$$ L= \begin{cases} \hat y-y & \hat y>y\\\ y-\hat y & \hat y\<y \end{cases} \$$
+\$$ L= \begin{cases} \hat y-y & \hat y>y, y-\hat y & \hat y\<y , \end{cases} \$$
 
 Derivation
 

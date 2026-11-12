@@ -328,7 +328,7 @@ $$ L=
 \hat y-y ,
 & \hat y>y,
 y-\hat y ,
-& \hat y\<y,
+& \hat y<y,
 \end{cases} 
 $$
 
@@ -339,10 +339,11 @@ Differentiating:
 $$ \boxed{ \frac{\partial L}{\partial \hat y} = 
 \begin{cases}
 1 ,
-& \hat y>y,\\\ 
+& \hat y>y,
 -1 ,
 & \hat y\<y 
-\end{cases} } 
+\end{cases} 
+} 
 $$
 
 At $\hat y=y$, the derivative is undefined. A subgradient of zero is commonly used.

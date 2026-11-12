@@ -318,8 +318,8 @@ Using the piecewise definition:
 
 $$
 L = \begin{cases}
-\hat y-y & \hat y>y\\
-y-\hat y & \hat y<y
+\hat y-y & \hat y>y\\,
+y-\hat y & \hat y<y,
 \end{cases}
 $$
 
@@ -329,11 +329,10 @@ Differentiating:
 
 $$
 \boxed{
-\frac{\partial L}{\partial \hat y}
-=
+\frac{\partial L}{\partial \hat y}=
 \begin{cases}
-1 & \hat y>y\\
--1 & \hat y<y
+1 & \hat y>y\\,
+-1 & \hat y<y,
 \end{cases}
 }
 $$

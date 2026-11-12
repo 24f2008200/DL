@@ -338,8 +338,7 @@ $$
 \boxed{
 \frac{\partial L}{\partial \hat{y}} =
 \begin{cases}
-1 & \hat{y} > y \\
-\-1 & \hat{y} < y
+1 & \hat{y} > y \\ -1 & \hat{y} < y
 \end{cases}
 }
 $$

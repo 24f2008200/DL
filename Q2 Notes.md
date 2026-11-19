@@ -109,7 +109,7 @@ $$
 
 Typical: $\beta_1=0.9,\ \beta_2=0.999,\ \epsilon=10^{-8}$.
 
-- **Why bias correction:** with $m_0=0$, $\mathbb{E}[m_t]=\mathbb{E}[\nabla w](1-\beta_1^{\,t})$ (geometric series, assuming all gradients share one distribution), so dividing by $1-\beta_1^{\,t}$ gives $\mathbb{E}[\hat m_t]=\mathbb{E}[\nabla w]$.
+- **Why bias correction:** with $m_0=0$, $\mathbb{E}[m_t] = \mathbb{E}[\nabla w](1-\beta_1^t)$ (geometric series, assuming all gradients share one distribution), so dividing by $1-\beta_1^{\,t}$ gives $\mathbb{E}[\hat m_t]=\mathbb{E}[\nabla w]$.
 
 - Example: $\nabla w_0=0.1$, $\beta_2=0.999$: $v_0=0.001\cdot0.01=10^{-5}$; without correction $1/\sqrt{v_0}\approx316$, with correction $\hat v_0=0.01$ so $1/\sqrt{\hat v_0}=10$. No correction gives huge first steps.
 
@@ -198,7 +198,10 @@ $$
 Geometric view: let $w^*$ minimize $L$ (so $\nabla L(w^*)=0$) with Hessian $H=Q\Lambda Q^{T}$. With the quadratic approximation $\nabla L(w)=H(w-w^*)$, setting $\nabla\tilde L(\tilde w)=0$ gives 
 
 $$
-(H+\alpha I)\tilde w=Hw^*\ \Rightarrow\ \tilde w=(H+\alpha I)^{-1}Hw^*=Q(\Lambda+\alpha I)^{-1}\Lambda\,Q^{T}w^*
+(H+\alpha I)\tilde{w}=Hw^*
+\;\Rightarrow\;
+\tilde{w}=(H+\alpha I)^{-1}Hw^*
+=Q(\Lambda+\alpha I)^{-1}\Lambda Q^{T}w^*
 $$
 
 Each component of $Q^{T}w^*$ is scaled by $\dfrac{\lambda_i}{\lambda_i+\alpha}$: if $\lambda_i\gg\alpha$ the factor is about 1 (direction kept), if $\lambda_i\ll\alpha$ it is about 0 (direction shrunk). Only important directions (large eigenvalues) keep large weights. Effective number of parameters $=\sum_i\frac{\lambda_i}{\lambda_i+\alpha}<n$.
@@ -220,8 +223,13 @@ $$
 - **Early stopping:** track validation error with a patience $p$; if no improvement in the previous $p$ steps at step $k$, stop and return the model stored at step $k-p$. Very effective, most widely used, combinable with $\ell_2$. Equivalent to weight decay: with $w_0=0$ and SGD,
 
 $$
-w_t=Q\bigl[I-(I-\eta\Lambda)^t\bigr]Q^{T}w^*\ \ \text{(early stopping)}\qquad
-\tilde w=Q\bigl[I-(\Lambda+\alpha I)^{-1}\alpha\bigr]Q^{T}w^*\ \ (\ell_2)
+w_t=Q\bigl[I-(I-\eta\Lambda)^t\bigr]Q^{T}w^*
+\qquad \text{(early stopping)}
+$$
+
+$$
+\tilde{w}=Q\bigl[I-(\Lambda+\alpha I)^{-1}\alpha I\bigr]Q^{T}w^*
+\qquad \text{($\ell_2$ regularization)}
 $$
 
 equal when $(I-\eta\Lambda)^t=(\Lambda+\alpha I)^{-1}\alpha$. Only $t$ updates are allowed, so parameters of unimportant directions (small gradients) cannot grow large, which shrinks them like weight decay.

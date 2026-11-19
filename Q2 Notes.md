@@ -109,7 +109,7 @@ $$
 
 Typical: $\beta_1=0.9,\ \beta_2=0.999,\ \epsilon=10^{-8}$.
 
-- **Why bias correction:** with $m_0=0$, $\mathbb{E}[m_t] = \mathbb{E}[\nabla w](1-\beta_1^t)$ (geometric series, assuming all gradients share one distribution), so dividing by $1-\beta_1^{\,t}$ gives $\mathbb{E}[\hat m_t]=\mathbb{E}[\nabla w]$.
+- **Why bias correction:** with $m_0=0$,$\mathbb{E}[m_t] = \mathbb{E}[\nabla w]\left(1-\beta_1^t\right)$(geometric series, assuming all gradients share one distribution), so dividing by $1-\beta_1^{\,t}$ gives $\mathbb{E}[\hat m_t]=\mathbb{E}[\nabla w]$.
 
 - Example: $\nabla w_0=0.1$, $\beta_2=0.999$: $v_0=0.001\cdot0.01=10^{-5}$; without correction $1/\sqrt{v_0}\approx316$, with correction $\hat v_0=0.01$ so $1/\sqrt{\hat v_0}=10$. No correction gives huge first steps.
 
